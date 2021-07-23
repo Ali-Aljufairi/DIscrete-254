@@ -20,7 +20,7 @@ python3 -m venv ./venv
 
 ### Install python package
 
-###### windows / linux
+###### windows & linux
 
 ```bash
 pip install -e ./itcs254
