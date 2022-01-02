@@ -1,16 +1,12 @@
 from itcs254 import Relations
 
-
-print(Relations((9, 9), (3, 3), (1, 1), (6, 6), (3, 1)).is_antisymmetric())
-print(Relations((1, 2), (3, 4), (2, 1)).is_antisymmetric())
-
+# U = {1, 6, 3, 9}
+# def F(a, b): return a + b <= 10 and any((a + b) % x ** 2 == 0 for x in U)
 
 
+# r = Relations(((a, b) for a in U for b in U if F(a, b) or F(b, a)), U)
 
 
+r = Relations([(0, 0), (1, 1), (2, 2), (4, 4)], {0, 1, 2, 4})
 
-
-
-# we (x,y) , (9,)
-
-
+print(r.relations())
