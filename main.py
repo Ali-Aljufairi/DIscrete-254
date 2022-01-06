@@ -8,7 +8,7 @@ from itcs254 import Relations
 #r = Relations(((a, b) for a in U for b in U if F(a, b) or F(b, a)), U)
 
 
-r = Relations([(3,4)], {0, 1,3,4})
+r = Relations([(0,4),(1,1),(1,3),(2,2),(3,1),(4,0)], {0, 1,3,4})
 
 
 

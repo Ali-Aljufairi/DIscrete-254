@@ -79,3 +79,14 @@ class Relations:
                 if y == y2 and ((x, z) not in self.pairs):
                     return False
         return True 
+         
+
+  def transitive(R, A):
+    """Returns True if a relation R on set A is transitive, False otherwise."""
+    for a in A:
+        for b in A:
+            if (a, b) in R:
+                for c in A:
+                    if (b, c) in R and (a, c) not in R:
+                        return False
+    return True
