@@ -56,7 +56,7 @@ class Relations:
             return True
 
         if len(self.pairs) == 1:
-            return False
+            return True 
 
         s = set()
 
