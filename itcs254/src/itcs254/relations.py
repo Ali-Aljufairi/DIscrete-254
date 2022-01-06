@@ -71,11 +71,11 @@ class Relations:
         if len(self.pairs) < 0:
             return True
 
-        if len(self.pairs) < 3:
-            return False
+       # if len(self.pairs) < 3:
+        #    return False
 
         for x, y in self.pairs:
             for y2, z in self.pairs:
                 if y == y2 and ((x, z) not in self.pairs):
                     return False
-        return True
+        return True 
