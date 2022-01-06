@@ -7,6 +7,6 @@ from itcs254 import Relations
 # r = Relations(((a, b) for a in U for b in U if F(a, b) or F(b, a)), U)
 
 
-r = Relations([(0, 0), (1, 1), (2, 2), (4, 4)], {0, 1, 2, 4})
+r = Relations([(3, 4), ], {0, 1, 3, 4})
 
 print(r.relations())

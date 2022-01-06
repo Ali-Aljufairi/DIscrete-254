@@ -55,7 +55,7 @@ class Relations:
         if len(self.pairs) < 0:
             return True
 
-        if len(self.pairs) < 2:
+        if len(self.pairs) == 1:
             return False
 
         s = set()
