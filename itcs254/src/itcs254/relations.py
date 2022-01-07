@@ -15,6 +15,7 @@ class Relations:
             )
 
     def is_reflective(self) -> bool:
+        """Return True if the relation is reflexive, False otherwise."""
 
         if len(self.pairs) == 0:
             return False
@@ -29,11 +30,8 @@ class Relations:
         return True
 
     def is_symmetric(self) -> bool:
-        if len(self.pairs) < 0:
+        if len(self.pairs) == 0:
             return True
-
-        if len(self.pairs) < 2:
-            return False
 
         s = set()
 
@@ -42,21 +40,11 @@ class Relations:
                 return True
             s.add((x, y))
 
-        for x, y in self.pairs:
-            if x == y:
-                pairs = list(self.pairs)
-                pairs.remove((x, x))
-
-                return not any(x in pair for pair in pairs)
-
-        return False
+        return all(x == y for x, y in self.pairs)
 
     def is_antisymmetric(self) -> bool:
-        if len(self.pairs) < 0:
+        if len(self.pairs) <= 1:
             return True
-
-        if len(self.pairs) == 1:
-            return True 
 
         s = set()
 
@@ -68,20 +56,22 @@ class Relations:
         return True
 
     def is_transitive(self) -> bool:
-        if len(self.pairs) < 0:
+        if len(self.pairs) <= 1:
             return True
 
-       # if len(self.pairs) < 3:
-        #    return False
+        s = set()
 
         for x, y in self.pairs:
-            for y2, z in self.pairs:
-                if y == y2 and ((x, z) not in self.pairs):
-                    return False
-        return True 
-         
+            s.add((x, y))
 
-  def transitive(R, A):
+            for z in [b for a, b in s if (a == y)]:
+                if (x, z) in s:
+                    return True
+
+        return False
+
+
+def transitive(R, A):
     """Returns True if a relation R on set A is transitive, False otherwise."""
     for a in A:
         for b in A:
