@@ -41,14 +41,7 @@ class Relations:
         if len(self.pairs) == 0:
             return True
 
-        s = set()
-
-        for x, y in self.pairs:
-            if (y, x) in s:
-                return True
-            s.add((x, y))
-
-        return all(x == y for x, y in self.pairs)
+        return all((R[::-1] in self.pairs) for R in self.pairs)
 
     def is_antisymmetric(self) -> bool:
         if len(self.pairs) <= 1:

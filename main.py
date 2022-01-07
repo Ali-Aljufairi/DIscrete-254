@@ -28,7 +28,7 @@ U = set(range(N, X + 1))
 
 
 def F(x, y):
-    return 4*(x**2)-1 <=y
+    return 4 * (x**2)-1 <= y
 
 
 R = ((x, y) for x in U for y in U if F(x, y) or F(y, x))
