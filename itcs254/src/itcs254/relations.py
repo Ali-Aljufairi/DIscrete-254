@@ -53,18 +53,9 @@ class Relations:
         if len(self.pairs) <= 1:
             return True
 
-        x = filter(lambda pair: pair[0] == pair[1], self.pairs)
+        x = list(pair for pair in self.pairs if pair[0] != pair[1])
 
-        return any(x) or all((R[::-1] not in self.pairs) for R in x)
-
-        # s = set()
-
-        # for x, y in self.pairs:
-        #     if (y, x) in s:
-        #         return x == y
-        #     s.add((x, y))
-
-        # return True
+        return not any(x) or all((R[::-1] not in x) for R in x)
 
     def is_transitive(self) -> bool:
         if len(self.pairs) <= 1:
