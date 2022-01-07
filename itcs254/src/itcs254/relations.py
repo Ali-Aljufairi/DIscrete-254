@@ -1,7 +1,7 @@
 class Relations:
 
     def __init__(self, universal: set[int] = set(), pairs: set[tuple[int, int]] = set()) -> None:
-        self.pairs, self.universal = set(pairs), set(universal)
+        self.universal, self.pairs = set(universal), set(pairs)
 
     def __str__(self) -> str:
         return '[' + ', '.join(f"({pair[0]}, {pair[1]})" for pair in self.pairs) + ']'
