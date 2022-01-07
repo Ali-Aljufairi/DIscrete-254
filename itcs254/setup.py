@@ -8,7 +8,6 @@ setuptools.setup(
     version='0.1.0',
 
     author=['hussain', 'ali'],
-    author_email='',
 
     description="Set of python program that can solve discrete math problem",
 

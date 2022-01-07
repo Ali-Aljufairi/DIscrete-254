@@ -10,7 +10,7 @@ from itcs254 import Relations
 U = {1, 2, 3}
 R = {(1, 1), (1, 2)}
 
-print(Relations(R, U).relations())
+print(Relations(U, R).relations())
 
 
 # %% ----------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ def F(x, y): return x + y == 4
 R = {(x, y) for x in U for y in U if F(x, y)}
 
 
-print(Relations(R, U).relations())
+print(Relations(U, R).relations())
 
 
 # %% ----------------------------------------------------------------------------------------------------

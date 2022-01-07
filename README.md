@@ -4,13 +4,13 @@
 
 ### Create virtual environment
 
-###### Windows
+###### windows
 
 ```powershell
 py -m venv .\venv
 ```
 
-###### Linux
+###### linux
 
 ```bash
 python3 -m venv ./venv
