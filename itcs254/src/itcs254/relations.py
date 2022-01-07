@@ -10,8 +10,16 @@ class Relations:
     def relations(self) -> str:
         return f"\n{self.universal}\n{self}\n{'-'*20}\n" \
             + '\n'.join(
-                f"{s:^13}: {'✔' if t() else '❌'}\n"
-                for s, t in {'Reflective': self.is_reflective, 'Symmetric': self.is_symmetric, 'Antisymmetric': self.is_antisymmetric, 'Transitive': self.is_transitive}.items()
+                f"{s:^13}: {'✔' if t() else '❌'}"
+                for s, t in {
+                    'Reflective': self.is_reflective,
+                    'Symmetric': self.is_symmetric,
+                    'Antisymmetric': self.is_antisymmetric,
+                    'Transitive': self.is_transitive,
+                    '-'*20: lambda: self.is_equivalent() and self.is_partial(),
+                    'Equivalent': self.is_equivalent,
+                    'Partial': self.is_partial,
+                }.items()
             )
 
     def is_reflective(self) -> bool:
@@ -69,6 +77,12 @@ class Relations:
                     return True
 
         return False
+
+    def is_equivalent(self) -> bool:
+        return self.is_reflective() and self.is_symmetric() and self.is_transitive()
+
+    def is_partial(self) -> bool:
+        return self.is_reflective() and self.is_antisymmetric() and self.is_transitive()
 
 
 def transitive(R, A):

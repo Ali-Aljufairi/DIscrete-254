@@ -3,35 +3,32 @@ from itcs254 import Relations
 
 
 # %%
-from itcs254 import Relations
-U = {1, 2}
-R = [(1, 1), (1, 2)]
 
 
-print(Relations(R, U).relations())
+A = set(range(0, 5))
+B = set(range(0, 4))
 
 
-# %%
-
-U = {1, 6, 3, 9}
-def F(a, b): return a + b <= 10 and any((a + b) % x ** 2 == 0 for x in U)
+def F(x, y):
+    return x + y == 4
 
 
-r = Relations(((a, b) for a in U for b in U if F(a, b) or F(b, a)), U)
+R = ((x, y) for x in A for y in B if F(x, y) or F(y, x))
 
-print(r.relations())
+
+print(Relations(R, A.union(B)).relations())
 
 
 # %%
 
-N = -5
-X = 5
+N = 1
+X = 40
 
 U = set(range(N, X + 1))
 
 
-def F(a, b):
-    return (a * b) == 0
+def F(x, y):
+    return 4*(x**2)-1 <=y
 
 
 R = ((x, y) for x in U for y in U if F(x, y) or F(y, x))
@@ -52,6 +49,15 @@ def F(a, b):
 
 
 R = ((x, y) for x in U for y in U if F(x, y) or F(y, x))
+
+
+print(Relations(R, U).relations())
+
+
+# %%
+
+U = {1, 2, 3}
+R = [(1, 1), (1, 2)]
 
 
 print(Relations(R, U).relations())
