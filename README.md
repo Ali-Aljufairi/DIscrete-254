@@ -27,3 +27,11 @@ pip install -e ./itcs254
 ```
 
 ---
+
+## Test
+
+###### windows / linux
+
+```bash
+pytest
+```

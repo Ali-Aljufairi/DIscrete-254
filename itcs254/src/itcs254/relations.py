@@ -1,30 +1,37 @@
 class Relations:
 
-    def __init__(self, pairs: list[tuple[int, int]], universal: tuple[int] = set()) -> None:
-        self.pairs = tuple(pairs)
-        self.universal = set(universal)
+    def __init__(self, universal: set[int] = set(), pairs: set[tuple[int, int]] = set()) -> None:
+        self.pairs, self.universal = set(pairs), set(universal)
 
     def __str__(self) -> str:
         return '[' + ', '.join(f"({pair[0]}, {pair[1]})" for pair in self.pairs) + ']'
 
     def relations(self) -> str:
-        return f"\n{self.universal}\n{self}\n{'-'*20}\n" \
-            + '\n'.join(
-                f"{s:^13}: {'✔' if t() else '❌'}"
-                for s, t in {
-                    'Reflective': self.is_reflective,
-                    'Symmetric': self.is_symmetric,
-                    'Antisymmetric': self.is_antisymmetric,
-                    'Transitive': self.is_transitive,
-                    '-'*20: lambda: self.is_equivalent() and self.is_partial(),
-                    'Equivalent': self.is_equivalent,
-                    'Partial': self.is_partial,
-                }.items()
+
+        reflective = self.is_reflective()
+        symmetric = self.is_symmetric()
+        antisymmetric = self.is_antisymmetric()
+        transitive = self.is_transitive()
+
+        all = reflective and symmetric and antisymmetric and transitive
+        equivalent = reflective and symmetric and transitive
+        partial = reflective and antisymmetric and transitive
+
+        return f"\n{self.universal}\n{self}\n" + \
+            '\n'.join(
+                f"{s:^13}: {'✔' if t else '❌'}" for s, t in (
+                    ('-'*20, all),
+                    ('Reflective', reflective),
+                    ('Symmetric', symmetric),
+                    ('Antisymmetric', antisymmetric),
+                    ('Transitive', transitive),
+                    ('-'*20, equivalent and partial),
+                    ('Equivalent', equivalent),
+                    ('Partial', partial),
+                )
             )
 
     def is_reflective(self) -> bool:
-        """Return True if the relation is reflexive, False otherwise."""
-
         if len(self.pairs) == 0:
             return False
 
@@ -47,14 +54,18 @@ class Relations:
         if len(self.pairs) <= 1:
             return True
 
-        s = set()
+        x = filter(lambda pair: pair[0] == pair[1], self.pairs)
 
-        for x, y in self.pairs:
-            if (y, x) in s:
-                return x == y
-            s.add((x, y))
+        return any(x) or all((R[::-1] not in self.pairs) for R in x)
 
-        return True
+        # s = set()
+
+        # for x, y in self.pairs:
+        #     if (y, x) in s:
+        #         return x == y
+        #     s.add((x, y))
+
+        # return True
 
     def is_transitive(self) -> bool:
         if len(self.pairs) <= 1:
