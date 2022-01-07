@@ -17,19 +17,18 @@ class Relations:
         equivalent = reflective and symmetric and transitive
         partial = reflective and antisymmetric and transitive
 
-        return f"\n{self.universal}\n{self}\n" + \
-            '\n'.join(
-                f"{s:^13}: {'✔' if t else '❌'}" for s, t in (
-                    ('-'*20, all),
-                    ('Reflective', reflective),
-                    ('Symmetric', symmetric),
-                    ('Antisymmetric', antisymmetric),
-                    ('Transitive', transitive),
-                    ('-'*20, equivalent and partial),
-                    ('Equivalent', equivalent),
-                    ('Partial', partial),
-                )
+        return f"\n{self.universal}\n{self}\n" + '\n'.join(
+            f"{s:^13}: {'✔' if t else '❌'}" for s, t in (
+                ('-'*20, all),
+                ('Reflective', reflective),
+                ('Symmetric', symmetric),
+                ('Antisymmetric', antisymmetric),
+                ('Transitive', transitive),
+                ('-'*20, equivalent and partial),
+                ('Equivalent', equivalent),
+                ('Partial', partial),
             )
+        )
 
     def is_reflective(self) -> bool:
         if len(self.pairs) == 0:
